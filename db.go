@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/aswa2ds/as-cron/as-cron-db/cron_jobs"
+	"github.com/aswa2ds/as-cron-db/cron_jobs"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )

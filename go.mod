@@ -1,4 +1,4 @@
-module github.com/aswa2ds/as-cron/as-cron-db
+module github.com/aswa2ds/as-cron-db
 
 go 1.20
 
