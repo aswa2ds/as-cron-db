@@ -37,16 +37,23 @@ func (c *clientSet) CronJobs() cron_jobs.CronJobDao {
 	return cron_jobs.GetCronJobDao(c.db)
 }
 
-func BuildFromConfig(cfg Config) (Interface, error) {
+func ClientSet() (Interface, error) {
 	if client.db != nil {
 		return &client, nil
+	}
+	return nil, fmt.Errorf("ClientSet has not been initialized. Please call the Init Func first")
+}
+
+func Init(cfg Config) error {
+	if client.db != nil {
+		return nil
 	}
 
 	client.lock.Lock()
 	defer client.lock.Unlock()
 
 	if client.db != nil {
-		return &client, nil
+		return nil
 	}
 
 	dsn := fmt.Sprintf(
@@ -59,8 +66,5 @@ func BuildFromConfig(cfg Config) (Interface, error) {
 	)
 	var err error
 	client.db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	if err != nil {
-		return nil, err
-	}
-	return &client, nil
+	return err
 }
