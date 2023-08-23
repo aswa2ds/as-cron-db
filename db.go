@@ -18,7 +18,7 @@ type MysqlCfg struct {
 }
 
 type Config struct {
-	mysql MysqlCfg
+	Mysql MysqlCfg
 }
 
 var client clientSet
@@ -58,11 +58,11 @@ func Init(cfg Config) error {
 
 	dsn := fmt.Sprintf(
 		"%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
-		cfg.mysql.Username,
-		cfg.mysql.Password,
-		cfg.mysql.Address,
-		cfg.mysql.Port,
-		cfg.mysql.DatebaseName,
+		cfg.Mysql.Username,
+		cfg.Mysql.Password,
+		cfg.Mysql.Address,
+		cfg.Mysql.Port,
+		cfg.Mysql.DatebaseName,
 	)
 	var err error
 	client.db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
