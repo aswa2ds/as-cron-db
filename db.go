@@ -14,7 +14,7 @@ type MysqlCfg struct {
 	Password     string
 	Address      string
 	Port         string
-	DatebaseName string
+	DatabaseName string
 }
 
 type Config struct {
@@ -62,7 +62,7 @@ func Init(cfg Config) error {
 		cfg.Mysql.Password,
 		cfg.Mysql.Address,
 		cfg.Mysql.Port,
-		cfg.Mysql.DatebaseName,
+		cfg.Mysql.DatabaseName,
 	)
 	var err error
 	client.db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
