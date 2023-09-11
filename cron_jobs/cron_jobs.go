@@ -18,6 +18,7 @@ type CronJob struct {
 }
 
 type CronJobDao interface {
+	GetByJobName(jobName string) CronJob
 	List() []CronJob
 	Insert(cronJob CronJob)
 	UpdateNextToggleTime(cronJob CronJob)
@@ -33,6 +34,13 @@ func GetCronJobDao(db *gorm.DB) CronJobDao {
 
 type cronJobMysqlDao struct {
 	db *gorm.DB
+}
+
+// GetByJobName implements CronJobDao.
+func (dao *cronJobMysqlDao) GetByJobName(jobName string) CronJob {
+	var cronJob CronJob
+	dao.db.Where(&CronJob{JobName: jobName}).Take(&cronJob)
+	return cronJob
 }
 
 // Insert implements CronJobDao.
