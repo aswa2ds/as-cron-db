@@ -38,7 +38,7 @@ type cronJobMysqlDao struct {
 
 // GetByJobName implements CronJobDao.
 func (dao *cronJobMysqlDao) GetByID(id uint) CronJob {
-	var cronJob CronJob
+	cronJob := CronJob{}
 	dao.db.Where(&CronJob{
 		Model: gorm.Model{
 			ID: id,
